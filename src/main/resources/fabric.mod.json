@@ -1,0 +1,37 @@
+{
+	"schemaVersion": 1,
+	"id": "sandbox",
+	"version": "${version}",
+	"name": "Sandbox",
+	"description": "This is my sandbox mod! Early concepts will be coded in this mod. First I plan to figure out Edgedancer powers!",
+	"authors": [
+		"Lincoln Hanks (Erikk Holdern)"
+	],
+	"contact": {
+		"homepage": "https://fabricmc.net/",
+		"sources": "https://github.com/FabricMC/fabric-example-mod"
+	},
+	"license": "CC0-1.0",
+	"icon": "assets/sandbox/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"com.erikkholdern.sandbox.Sandbox"
+		],
+		"fabric-datagen": [
+			"com.erikkholdern.sandbox.SandboxDataGenerator"
+		],
+		"client": [
+			"com.erikkholdern.sandbox.SandboxClient"
+		]
+	},
+	"mixins": [
+		"sandbox.mixins.json"
+	],
+	"depends": {
+		"fabricloader": ">=0.18.4",
+		"minecraft": "~1.21",
+		"java": ">=21",
+		"fabric-api": "*"
+	}
+}
