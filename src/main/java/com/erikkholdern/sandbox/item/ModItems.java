@@ -1,6 +1,7 @@
 package com.erikkholdern.sandbox.item;
 
 import com.erikkholdern.sandbox.Sandbox;
+import com.erikkholdern.sandbox.item.custom.AbrasionGranterItem;
 import com.erikkholdern.sandbox.item.custom.RegenerationGranterItem;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.item.Item;
@@ -29,6 +30,8 @@ public class ModItems {
 
     public static final Item REGENERATION_GRANTER = registerItem("regeneration_granter",
             new RegenerationGranterItem(new Item.Settings().maxCount(1)));
+    public static final Item ABRASION_GRANTER = registerItem("abrasion_granter",
+            new AbrasionGranterItem(new Item.Settings().maxCount(1)));
 
 
     // Helper Method
@@ -48,6 +51,7 @@ public class ModItems {
             entries.add(PINK_GARNET); // We could do this with a for loop!
             entries.add(RAW_PINK_GARNET);
             entries.add(REGENERATION_GRANTER);
+            entries.add(ABRASION_GRANTER);
         });
     }
 }

@@ -1,5 +1,6 @@
 package com.erikkholdern.sandbox;
 
+import com.erikkholdern.sandbox.effect.ModStatusEffects;
 import com.erikkholdern.sandbox.item.ModItems;
 import net.fabricmc.api.ModInitializer;
 
@@ -25,6 +26,8 @@ public class Sandbox implements ModInitializer {
 		// which is why this is where we register blocks, items, rendering, etc.
 
 		ModItems.registerModItems();
+
+		ModStatusEffects.registerModStatusEffects();
 
 		LOGGER.info("Hello Fabric world!");
 	}

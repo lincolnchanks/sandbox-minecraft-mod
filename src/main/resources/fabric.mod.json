@@ -23,6 +23,9 @@
 		],
 		"client": [
 			"com.erikkholdern.sandbox.SandboxClient"
+		],
+		"cardinal-components-entity": [
+			"com.erikkholdern.sandbox.component.ModEntityComponents"
 		]
 	},
 	"mixins": [
