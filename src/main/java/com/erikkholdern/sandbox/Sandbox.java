@@ -1,5 +1,6 @@
 package com.erikkholdern.sandbox;
 
+import com.erikkholdern.sandbox.item.ModItems;
 import net.fabricmc.api.ModInitializer;
 
 import org.slf4j.Logger;
@@ -22,6 +23,8 @@ public class Sandbox implements ModInitializer {
 		// When Minecraft starts and is ready for mods, this class runs the following
 		// code. This is the method that powers the entire mod's functionality,
 		// which is why this is where we register blocks, items, rendering, etc.
+
+		ModItems.registerModItems();
 
 		LOGGER.info("Hello Fabric world!");
 	}
