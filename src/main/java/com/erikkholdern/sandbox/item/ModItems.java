@@ -1,6 +1,7 @@
 package com.erikkholdern.sandbox.item;
 
 import com.erikkholdern.sandbox.Sandbox;
+import com.erikkholdern.sandbox.item.custom.RegenerationGranterItem;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroups;
@@ -26,6 +27,9 @@ public class ModItems {
     public static final Item RAW_PINK_GARNET = registerItem("raw_pink_garnet",
             new Item(new Item.Settings()));
 
+    public static final Item REGENERATION_GRANTER = registerItem("regeneration_granter",
+            new RegenerationGranterItem(new Item.Settings().maxCount(1)));
+
 
     // Helper Method
     private static Item registerItem(String name, Item item){
@@ -43,6 +47,7 @@ public class ModItems {
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.INGREDIENTS).register(entries -> {
             entries.add(PINK_GARNET); // We could do this with a for loop!
             entries.add(RAW_PINK_GARNET);
+            entries.add(REGENERATION_GRANTER);
         });
     }
 }
