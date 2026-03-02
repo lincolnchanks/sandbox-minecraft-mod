@@ -1,12 +1,22 @@
 package com.erikkholdern.sandbox.effect;
 
+import com.erikkholdern.sandbox.component.AbrasionComponent;
+import com.erikkholdern.sandbox.component.AbrasionLogic;
+import com.erikkholdern.sandbox.component.ModComponents;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.data.DataTracker;
+import net.minecraft.entity.data.TrackedData;
+import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectCategory;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.math.Vec3d;
 
 public class AbrasionStatusEffect extends StatusEffect {
-//    double lastTickHorizontalSpeed;
+    private static final TrackedData<Float> ABRASION_LAST_VX =
+            DataTracker.registerData(LivingEntity.class, TrackedDataHandlerRegistry.FLOAT);
+    private static final TrackedData<Float> ABRASION_LAST_VZ =
+            DataTracker.registerData(LivingEntity.class, TrackedDataHandlerRegistry.FLOAT);
 
     protected AbrasionStatusEffect() {
         super(StatusEffectCategory.BENEFICIAL, 0x15e6e2);
@@ -19,34 +29,62 @@ public class AbrasionStatusEffect extends StatusEffect {
 
     @Override
     public boolean applyUpdateEffect(LivingEntity entity, int amplifier) {
-        // Get the entity's velocity vector and from it, calculate their horizontal speed.
+        if (!(entity instanceof PlayerEntity player)) return true;
+//        AbrasionComponent abrasion = ModComponents.ABRASION.get(entity);
+        AbrasionComponent abrasion = AbrasionLogic.get(player);
+
         Vec3d v = entity.getVelocity();
-        double currentHorizontalSpeed = Math.sqrt(v.x * v.x + v.z * v.z);
 
-        // Removing this if-statement accidentally created an adhesion-like effect.
-        // It also preserved all the velocity my player was given after force was exerted, such as with water.
-        // This could be useful for Gravitation down the line!!
-        if (currentHorizontalSpeed > 0.01 && entity.isOnGround()){
-//            if (currentHorizontalSpeed < lastTickHorizontalSpeed){
-                // If this is the case, then friction happened. Restore some of the lost speed.
+        double lastX = abrasion.getLastX();
+        double lastZ = abrasion.getLastZ();
 
-//            }
-//            double boost = 0.05;
-//            double scale = (currentHorizontalSpeed + boost) / currentHorizontalSpeed;
-//
-//            double newX = v.x * scale;
-//            double newZ = v.z * scale;
-
-//            entity.setVelocity(newX, v.y, newZ);
+        if (entity.isOnGround() && !entity.isSneaking()){
+            // Frictionless logic here
+            entity.setVelocity(lastX, v.y, lastZ);
             entity.velocityModified = true;
-
-            Vec3d v1 = entity.getVelocity();
-//            lastTickHorizontalSpeed = Math.sqrt(v1.x * v1.x + v1.z * v1.z);
         }
 
-//        double glideFactor = 0.95;
-//        double newX = v.x * glideFactor;
-//        double newZ = v.z * glideFactor;
-        return super.applyUpdateEffect(entity, amplifier);
+        abrasion.setLastX(v.x);
+        abrasion.setLastZ(v.z);
+
+        return true;
     }
+
+    @Override
+    public void onApplied(LivingEntity entity, int amplifier) {
+
+    }
+
+    //    @Override
+//    public boolean applyUpdateEffect(LivingEntity entity, int amplifier) {
+//        // Get the entity's velocity vector and from it, calculate their horizontal speed.
+//        Vec3d v = entity.getVelocity();
+//        double currentHorizontalSpeed = Math.sqrt(v.x * v.x + v.z * v.z);
+//
+//        // Removing this if-statement accidentally created an adhesion-like effect.
+//        // It also preserved all the velocity my player was given after force was exerted, such as with water.
+//        // This could be useful for Gravitation down the line!!
+//        if (currentHorizontalSpeed > 0.01 && entity.isOnGround()){
+////            if (currentHorizontalSpeed < lastTickHorizontalSpeed){
+//                // If this is the case, then friction happened. Restore some of the lost speed.
+//
+////            }
+////            double boost = 0.05;
+////            double scale = (currentHorizontalSpeed + boost) / currentHorizontalSpeed;
+////
+////            double newX = v.x * scale;
+////            double newZ = v.z * scale;
+//
+////            entity.setVelocity(newX, v.y, newZ);
+//            entity.velocityModified = true;
+//
+//            Vec3d v1 = entity.getVelocity();
+////            lastTickHorizontalSpeed = Math.sqrt(v1.x * v1.x + v1.z * v1.z);
+//        }
+//
+////        double glideFactor = 0.95;
+////        double newX = v.x * glideFactor;
+////        double newZ = v.z * glideFactor;
+//        return super.applyUpdateEffect(entity, amplifier);
+//    }
 }

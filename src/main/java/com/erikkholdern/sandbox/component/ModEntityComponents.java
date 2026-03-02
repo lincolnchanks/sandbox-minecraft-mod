@@ -6,11 +6,13 @@ import org.ladysnake.cca.api.v3.entity.RespawnCopyStrategy;
 
 public class ModEntityComponents implements EntityComponentInitializer {
     @Override
-    public void registerEntityComponentFactories(EntityComponentFactoryRegistry entityComponentFactoryRegistry) {
-//        entityComponentFactoryRegistry.registerForPlayers(
-//                ModComponents.GLIDE,
-//                playerEntity -> new GlideComponentImpl(),
-//                RespawnCopyStrategy.ALWAYS_COPY
-//        );
+    public void registerEntityComponentFactories(EntityComponentFactoryRegistry registry) {
+        System.out.println(">>> REGISTERING ABRASION COMPONENT <<<");
+
+        registry.registerForPlayers(
+                ModComponents.ABRASION,
+                playerEntity -> new AbrasionComponentImpl(),
+                RespawnCopyStrategy.ALWAYS_COPY
+        );
     }
 }

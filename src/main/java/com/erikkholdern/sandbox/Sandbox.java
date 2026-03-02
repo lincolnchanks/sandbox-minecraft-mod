@@ -1,5 +1,6 @@
 package com.erikkholdern.sandbox;
 
+import com.erikkholdern.sandbox.component.ModComponents;
 import com.erikkholdern.sandbox.effect.ModStatusEffects;
 import com.erikkholdern.sandbox.item.ModItems;
 import net.fabricmc.api.ModInitializer;
@@ -24,6 +25,8 @@ public class Sandbox implements ModInitializer {
 		// When Minecraft starts and is ready for mods, this class runs the following
 		// code. This is the method that powers the entire mod's functionality,
 		// which is why this is where we register blocks, items, rendering, etc.
+
+//		ModComponents.init();
 
 		ModItems.registerModItems();
 
